@@ -1,0 +1,20 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Build de la imagen
+        run: docker build -t frontend-test ./client
+
+      - name: Ejecutar pruebas
+        run: docker run frontend-test npm test -- --watchAll=false
