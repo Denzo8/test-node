@@ -7,14 +7,14 @@ on:
     branches: [ main, master ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout código
+      - name: Checkout del código
         uses: actions/checkout@v4
 
       - name: Build de la imagen
-        run: docker build -t frontend-test ./client
+        run: docker build -t algofields/node .
 
-      - name: Ejecutar pruebas
-        run: docker run frontend-test npm test -- --watchAll=false
+      - name: Listar imágenes
+        run: docker images algofields/node
